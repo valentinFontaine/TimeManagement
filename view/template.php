@@ -8,6 +8,11 @@
     </head>
     
     <body>
+    <nav>
+        <ul>
+            <li><a href="index.php?action=listTask">Liste des Tâches à faire</a></li>
+        </ul>
+    </nav>
     <?= $content ?>
     
     </body>
