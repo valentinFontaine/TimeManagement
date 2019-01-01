@@ -81,4 +81,60 @@ function addTask($category, $projectName, $name, $description, $estimated_durati
 
 }
 
+function endTask($tableCheck)
+{
+
+    require_once('model/TaskManager.php');
+
+
+    
+    $tasks = new TaskManager();
+    
+    $currentTask = $tasks->getTask($tableCheck['id']);
+
+    if (isset($currentTask['id']))
+    {
+        if (($currentTask['members_id'] == $_SESSION['id']) AND ($tableCheck['value'] == 'on'))
+        {
+            $tasks->endTask($currentTask['id']);
+        }
+        else
+        {
+            throw new Exception ('Cette tâche ne vous appartient pas ! vous ne pouvez pas la terminer');
+        }
+    }
+    else
+    {
+        throw new Exception ('Tâche n\'existe pas');
+    }
+   header('Location: index.php?action=listTask');       
+
+}
+
+function getTaskCheckId($post)
+{
+
+    $taskId = '';
+    $table = array();
+    $message = '';
+
+    foreach($post as $name => $value)
+    {
+        
+        $message = $message . '<br />['. $name . '] : ' . $value;
+        if (preg_match("#^checkTask_[0-9]+$#", $name) )
+        {
+            
+            $taskId = intval(substr($name, strlen("checkTask_")));
+            $table = array('id' => $taskId, 'value' => $value);
+            return $table;
+        }
+    }
+
+    throw new Exception($message);
+
+    return $table;
+}
+
+
 

@@ -38,6 +38,9 @@ try
                     }
                     break;
 
+                case 'endTask' :
+                    endTask(getTaskCheckId($_POST));
+                    break;
 
                 case 'connection':
                 case 'verifyIdentity':

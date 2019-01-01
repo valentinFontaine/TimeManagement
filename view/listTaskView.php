@@ -6,6 +6,7 @@
 
 <table>
     <tr>
+        <th>Terminer Tâche</th>
         <th>Catégorie</th>
         <th>Projet</th>
         <th>Tâche</th>
@@ -19,6 +20,7 @@
     {
 ?>
     <tr>
+        <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();"/></form></td> 
         <td><?= $data['category'] ?></td>
         <td><?= $data['project_name'] ?></td>
         <td><?= $data['task_name'] ?></td>
@@ -34,6 +36,7 @@
 
     <form action="index.php?action=addTask" method="POST">
         <tr>
+            <td></td>
             <td>
                 <select name="category" id="category">
                     <option value="personal">perso</option>
@@ -61,6 +64,7 @@
             <td><input type="date" name="due_date" id="due_date" placeholder="" /></td>
         </tr>
         <tr>
+            <td></td>
             <td></td>
             <td></td>           
             <td></td>       
