@@ -6,7 +6,7 @@ class Manager
     
     protected function dbConnect()
     {
-        $connectionFile = fopen('config/connection.db', 'r+');
+        $connectionFile = fopen('config/connection.db', 'r');
         
         $connectionString = fgets($connectionFile);
         $user=fgets($connectionFile);

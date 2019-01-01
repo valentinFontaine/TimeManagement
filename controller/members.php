@@ -13,8 +13,7 @@ function createMember($first_name, $last_name, $mail, $pass)
 
     if ($affectedLines === false)
     {
-        echo 'Le compte n\'a pas pu être ajouté'; 
-        //throw new Exception('Le compte n\'a pas pu être créé ! <br />first_name: ' . $first_name .'<br />last_name: ' . $last_name . '<br />mail : ' . $mail . '<br />pass : ' . $pass . '<br />pass_hash : '. $pass_hash);
+        throw new Exception ('Le compte n\'a pas pu être ajouté'); 
     }
     else
     {

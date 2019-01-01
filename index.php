@@ -27,6 +27,18 @@ try
                     listTask();
                     break;
 
+                case 'addTask' :
+                    if (isset($_POST['category']) AND isset($_POST['project']) AND isset($_POST['task']) AND isset($_POST['description']) AND isset($_POST['importance']) AND isset($_POST['estimated_duration']) AND isset($_POST['due_date']))
+                    {
+                        addTask($_POST['category'], $_POST['project'], $_POST['task'], $_POST['description'], $_POST['estimated_duration'], $_POST['importance'], $_POST['due_date']);
+                    }
+                    else
+                    {
+                        throw new Exception('Champs manquants');
+                    }
+                    break;
+
+
                 case 'connection':
                 case 'verifyIdentity':
                 case 'subscription':
@@ -92,7 +104,7 @@ try
         }
         else
         {
-            connection();
+                connection();
         }
     }
 }

@@ -10,7 +10,9 @@ class MembersManager extends Manager
         
         $req = $db->prepare('INSERT INTO members(first_name, last_name, mail, pass, subscription_date) VALUES(:first_name,:last_name, :mail, :pass, CURDATE())');
         $affectedLines = $req->execute(array('first_name' => $first_name, 'last_name' => $last_name, 'mail' => $mail, 'pass' => $pass));
-        return True;
+
+        $req->closeCursor();
+        return $affectedLines;
     }
 
     public function getMemberByMail($mail)
@@ -22,6 +24,8 @@ class MembersManager extends Manager
 
         $member = $members->fetch();
 
+        $members->closeCursor();
+
         return $member;
     }
     public function getMember($id)
@@ -32,6 +36,8 @@ class MembersManager extends Manager
         $members->execute(array($id));
 
         $member = $members->fetch();
+
+        $members->closeCursor();
 
         return $member;
     }
