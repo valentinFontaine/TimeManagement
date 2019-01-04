@@ -19,9 +19,9 @@ function listTask()
     require_once('model/ProjectManager.php');
 
     $tasks = new TaskManager();
-    $taskList = $tasks->getTasksToDo($_SESSION['id']);
+    $taskList = $tasks->getTasksToDo($_SESSION['id'], $_SESSION['category']);
     $projects = new ProjectManager();
-    $projectList = $projects->getProjects($_SESSION['id']);
+    $projectList = $projects->getProjects($_SESSION['id'], $_SESSION['category']);
 
     require('view/listTaskView.php');
 }
@@ -137,4 +137,81 @@ function getTaskCheckId($post)
 }
 
 
+function getListCategory()
+{
+    if (!isset($_SESSION['category']))
+    {
+        $_SESSION['category'] = '%';
+    }
+
+    $i = 0;
+    
+    $listCategory = array();
+
+    $listCategory[0][0] = $_SESSION['category'];
+    $listCategory[0][1] = translateCategory($_SESSION['category']);
+
+    if ($_SESSION['category'] != 'personal')    
+    {
+        $listCategory[$i+1][0] = 'personal';
+        $listCategory[$i+1][1] = translateCategory('personal');
+        $i = $i + 1;
+    }
+    
+    if ($_SESSION['category'] != 'workRelated')
+    {
+        $listCategory[$i+1][0] = 'workRelated';
+        $listCategory[$i+1][1] = translateCategory('workRelated');
+        $i = $i + 1;
+    }
+    if ($_SESSION['category'] != '%')
+    {
+        $listCategory[$i+1][0] = '%';
+        $listCategory[$i+1][1] = translateCategory('%');
+        $i = $i + 1;
+    }
+
+
+    return $listCategory;
+}
+
+function translateCategory($category)
+{
+    switch ($category)
+    {
+        case 'personal' :
+            $result = 'perso';
+            break;
+        case 'workRelated' : 
+            $result = 'pro';
+            break;
+        case '%' : 
+            $result = 'Tout';
+            break;
+        default : 
+            $result = '';
+            break;
+    }
+    return $result;
+}
+
+function setCategory()
+{
+    if (isset($_POST['category']))
+    {
+        if (($_POST['category'] == 'personal') Or ($_POST['category'] == 'workRelated') Or ($_POST['category'] == '%'))
+        {
+            $_SESSION['category'] = $_POST['category'];
+        }
+        else
+        {
+            $_SESSION['category'] = '%';
+        }
+    }
+    else 
+    {
+        $_SESSION['category'] = '%';
+    }
+} 
+                
 

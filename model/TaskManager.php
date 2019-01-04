@@ -4,14 +4,20 @@ require_once('Manager.php');
 
 class TaskManager extends Manager
 {
-    function getTasksToDo($members_id)
+    function getTasksToDo($members_id, $category)
     {
         $db = $this->dbConnect();
         //$tasks = $db->prepare('SELECT category, members_id, project_id, name, description, estimated_duration, importance, due_date FROM tasks WHERE end_date = \'0000-00-00 00:00:00\' AND  members_id = :members_id');
             
-        $tasks = $db->prepare('SELECT tasks.id as id, tasks.category as category, tasks.members_id as members_id, projects.name as project_name, tasks.name as task_name, tasks.description as description, tasks.estimated_duration as estimated_duration, tasks.importance as importance, tasks.due_date as due_date FROM tasks INNER JOIN projects ON tasks.project_id = projects.id WHERE tasks.end_date = \'0000-00-00 00:00:00\' AND  tasks.members_id = :members_id');
+        $tasks = $db->prepare('SELECT 
+                                    tasks.id as id, tasks.category as category, tasks.members_id as members_id, projects.name as project_name, tasks.name as task_name, tasks.description as description, 
+                                    tasks.estimated_duration as estimated_duration, tasks.importance as importance, tasks.due_date as due_date 
+                                FROM    
+                                    tasks INNER JOIN projects ON tasks.project_id = projects.id 
+                                WHERE 
+                                    tasks.end_date = \'0000-00-00 00:00:00\' AND  tasks.members_id = :members_id AND tasks.category LIKE :category');
 
-        $tasks->execute(array('members_id'=>$members_id));
+        $tasks->execute(array('members_id'=>$members_id, 'category' => $category));
 
         return $tasks;
     }    

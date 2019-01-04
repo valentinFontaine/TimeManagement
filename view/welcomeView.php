@@ -12,5 +12,5 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('view/template.php'); ?>
+<?php require('controller/templateConnected.php'); ?>
 
