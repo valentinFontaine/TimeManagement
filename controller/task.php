@@ -60,7 +60,7 @@ function addTask($category, $projectName, $name, $description, $estimated_durati
         }
     }
     
-    if( !empty($category) && !empty($name) && !empty($description) && !empty($estimated_duration) && !empty($importance) && !empty($due_date) && isset($_SESSION['id']))
+    if( !empty($category) && !empty($name) && !empty($estimated_duration) && !empty($importance) && !empty($due_date) && isset($_SESSION['id']))
     {
         $affectedLines = $tasks->addTask(htmlspecialchars($category), htmlspecialchars($project['id']), $_SESSION['id'],  htmlspecialchars($name), htmlspecialchars($description), htmlspecialchars($estimated_duration), htmlspecialchars($importance), htmlspecialchars($due_date) . ' 00:00:00');
 
@@ -76,7 +76,7 @@ function addTask($category, $projectName, $name, $description, $estimated_durati
     }
     else
     {
-        header('Location : index.php?action=listTask&error=emptyField');
+        throw new Exception('Champs vides');
     }
 
 }
@@ -197,11 +197,11 @@ function translateCategory($category)
 
 function setCategory()
 {
-    if (isset($_POST['category']))
+    if (isset($_POST['sessionCategory']))
     {
-        if (($_POST['category'] == 'personal') Or ($_POST['category'] == 'workRelated') Or ($_POST['category'] == '%'))
+        if (($_POST['sessionCategory'] == 'personal') Or ($_POST['sessionCategory'] == 'workRelated') Or ($_POST['sessionCategory'] == '%'))
         {
-            $_SESSION['category'] = $_POST['category'];
+            $_SESSION['category'] = $_POST['sessionCategory'];
         }
         else
         {

@@ -7,13 +7,15 @@ try
     require('controller/members.php');
     require('controller/task.php');
 
-    if (isset($_POST['category']))
+    if (isset($_POST['sessionCategory']))
     {
+
         setCategory();
     }
 
     if (!isset($_SESSION['category']))
     {
+
         $_SESSION['category'] = '%';
     }
 

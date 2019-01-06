@@ -57,11 +57,11 @@
                     ?>
                 </datalist>
             </td>
-            <td><input type="text" name="task" id="task" placeholder="nom tâche" /></td>
-            <td><textarea name="description" id="description" placeholder="description de la tâche"></textarea></td>
-            <td><input type="text" name="estimated_duration" id="estimated_duration" placeholder="durée estimée" /></td>
+            <td><input type="text" name="task" id="task" placeholder="nom tâche" required/></td>
+            <td><textarea name="description" id="description" placeholder="description de la tâche" ></textarea></td>
+            <td><input type="text" name="estimated_duration" id="estimated_duration" placeholder="durée estimée" required /></td>
             <td><input type="range" min="1" max="4" step="1" name="importance" id="importance" placeholder="importance" title="1=Très importante, 4=peut important" /></td>
-            <td><input type="date" name="due_date" id="due_date" placeholder="" /></td>
+            <td><input type="date" name="due_date" id="due_date" placeholder="" required/></td>
         </tr>
         <tr>
             <td></td>
