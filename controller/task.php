@@ -62,7 +62,17 @@ function addTask($category, $projectName, $name, $description, $estimated_durati
     
     if( !empty($category) && !empty($name) && !empty($estimated_duration) && !empty($importance) && !empty($due_date) && isset($_SESSION['id']))
     {
-        $affectedLines = $tasks->addTask(htmlspecialchars($category), htmlspecialchars($project['id']), $_SESSION['id'],  htmlspecialchars($name), htmlspecialchars($description), htmlspecialchars($estimated_duration), htmlspecialchars($importance), htmlspecialchars($due_date) . ' 00:00:00');
+        if (preg_match('#^([0-9]+)(h|H|:)?([0-9]{0,2})$#', htmlspecialchars($estimated_duration), $duration_table))
+        {
+
+            $formated_duration = $duration_table[1]*60 + $duration_table[3];
+        }
+        else
+        {
+            throw new Exception('Format de durée non acceptée');
+        }
+
+        $affectedLines = $tasks->addTask(htmlspecialchars($category), htmlspecialchars($project['id']), $_SESSION['id'],  htmlspecialchars($name), htmlspecialchars($description), $formated_duration, htmlspecialchars($importance), htmlspecialchars($due_date) . ' 00:00:00');
 
 
         if ($affectedLines == false) 
