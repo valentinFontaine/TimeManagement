@@ -19,9 +19,9 @@ class ProjectManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $query = $db->prepare('SELECT id, members_id, name, description FROM projects WHERE id = :id');
+        $project = $db->prepare('SELECT id, members_id, name, description FROM projects WHERE id = :id');
 
-        $project = $query->execute(array('id' => $id));
+        $project->execute(array('id' => $id));
 
         $currentProject = $project->fetch();
 

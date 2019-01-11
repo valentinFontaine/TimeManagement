@@ -1,14 +1,28 @@
-<?php $title = 'Vos tâches'; ?>
+<?php $title = 'vos projets'; ?>
 
 <?php ob_start(); ?>
 
-<h2> Travail restant à faire ! </h2>
+<h2> <?= $currentProject['name'] ?> </h2>
+
+
+<form action="" method="POST" >
+
+    <p><label for="ProjectName">Nom</label><input type="text" name="ProjectName" id="ProjectName" value="<?= htmlSpecialChars($currentProject['name']) ?>" /></p>
+    <p><label for="ProjectDescription">Description</label><textarea name="ProjectDescription" id="ProjectDescription"><?= htmlSpecialChars($currentProject['description']) ?></textarea></p>
+    <p><input type="submit" value="Mise à jour" /></p>
+
+</form>
+
+<h2> Statistiques </h2>
+
+<p> Avancement : <?= $progress ?>%</p>
+
+<h2> Liste des tâches </h2>
 
 <table>
     <tr>
-        <th>Terminer Tâche</th>
+        <th>Avancement</th>
         <th>Catégorie</th>
-        <th>Projet</th>
         <th>Tâche</th>
         <th>Description</th>
         <th>durée estimée</th>
@@ -22,7 +36,6 @@
     <tr>
         <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();"/></form></td> 
         <td><?= $data['category'] ?></td>
-        <td><a href="index.php?action=viewProject&project_id=<?= $data['project_id'] ?>"><?= $data['project_name'] ?></a></td>
         <td><?= $data['task_name'] ?></td>
         <td><?= $data['description'] ?></td>
         <td><?= $data['estimated_duration'] ?></td>
@@ -35,6 +48,7 @@
 ?>
 
     <form action="index.php?action=addTask" method="POST">
+    <input type="hidden" name="project" id="project" value="<?= $currentProject['name'] ?>" />       
         <tr>
             <td></td>
             <td>
@@ -43,20 +57,6 @@
                     <option value="workrelated">pro</option>
                 </select>
             </td>
-            <td>
-                <input list="projectList" name="project" id="project" autocomplete="off" />
-                <datalist name="projectList" id="projectList">
-                    <?php 
-                        while($project = $projectList->fetch())
-                        {
-                    ?>
-                        <option value="<?= $project['name'] ?>" >
-                    <?php
-                        }
-                        $projectList->closeCursor();
-                    ?>
-                </datalist>
-            </td>
             <td><input type="text" name="task" id="task" placeholder="nom tâche" required/></td>
             <td><textarea name="description" id="description" placeholder="description de la tâche" ></textarea></td>
             <td><input type="text" name="estimated_duration" id="estimated_duration" placeholder="durée estimée" required /></td>
@@ -64,7 +64,6 @@
             <td><input type="date" name="due_date" id="due_date" placeholder="" required/></td>
         </tr>
         <tr>
-            <td></td>
             <td></td>
             <td></td>           
             <td></td>       

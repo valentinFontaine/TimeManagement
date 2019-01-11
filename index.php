@@ -6,6 +6,7 @@ try
 {
     require('controller/members.php');
     require('controller/task.php');
+    require('controller/project.php');
 
     if (isset($_POST['sessionCategory']))
     {
@@ -51,6 +52,17 @@ try
 
                 case 'endTask' :
                     endTask(getTaskCheckId($_POST));
+                    break;
+
+                case 'viewProject':
+                    if (isset($_GET['project_id']))
+                    {
+                        viewProject($_GET['project_id']);
+                    }
+                    else
+                    {
+                        throw new Exception('Projet non défini');
+                    }
                     break;
 
                 case 'connection':
