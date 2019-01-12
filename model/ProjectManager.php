@@ -55,5 +55,16 @@ class ProjectManager extends Manager
         return $affectedLines;
     }
 
+    function updateProject($id, $name, $description, $members_id)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('UPDATE projects SET name=:name, description=:description, members_id=:members_id WHERE id=:id');
+ 
+        $affectedLines = $query->execute(array('name' => $name, 'description' => $description, 'members_id' => $members_id, 'id' => intval($id)));
+
+        $query->closeCursor();
+
+        return $affectedLines;
+    }
 
 }

@@ -70,7 +70,7 @@ class TaskManager extends Manager
     function endTask($id)
     {
         $db = $this->dbConnect();
-        $query = $db->prepare('UPDATE tasks SET end_date=NOW(), progress=0 WHERE id=:id');
+        $query = $db->prepare('UPDATE tasks SET end_date=NOW(), progress=100 WHERE id=:id');
  
         $affectedLines = $query->execute(array('id' => intval($id)));
         $query->closeCursor();

@@ -33,4 +33,43 @@ function viewProject($id)
 
 }
 
+function updateProject($id, $name, $description)
+{
+
+    require_once('model/ProjectManager.php');
+
+    $projects = new ProjectManager();
+    
+    $currentProject = $projects->getProject($id);
+
+    if (isset($currentProject['id']))
+    {
+        if (($currentProject['members_id'] == $_SESSION['id']))
+        {
+
+            $affectedLines = $projects->updateProject($id, $name, $description, $_SESSION['id']);
+
+            if ($affectedLines == false)
+            {
+                throw new Exception('Le projet n\'a pas pu être mis à jour');
+            }
+            else
+            {
+                
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+
+        }
+        else
+        {
+
+            throw new Exception ('Ce projet ne vous appartient pas ! vous ne pouvez pas la terminer');
+        }
+    }
+    else
+    {
+        throw new Exception ('Le projet n\'existe pas');
+    }
+
+}
 

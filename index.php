@@ -64,6 +64,16 @@ try
                         throw new Exception('Projet non défini');
                     }
                     break;
+                case 'updateProject':
+                    if (isset($_POST['projectId']) And isset($_POST['projectName']) And isset($_POST['projectDescription']))
+                    {
+                        updateProject($_POST['projectId'], $_POST['projectName'], $_POST['projectDescription']);
+                    }
+                    else
+                    {
+                        throw new Exception('Champs manquants');
+                    }
+                    break;
 
                 case 'connection':
                 case 'verifyIdentity':

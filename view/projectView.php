@@ -5,10 +5,11 @@
 <h2> <?= $currentProject['name'] ?> </h2>
 
 
-<form action="" method="POST" >
-
-    <p><label for="ProjectName">Nom</label><input type="text" name="ProjectName" id="ProjectName" value="<?= htmlSpecialChars($currentProject['name']) ?>" /></p>
-    <p><label for="ProjectDescription">Description</label><textarea name="ProjectDescription" id="ProjectDescription"><?= htmlSpecialChars($currentProject['description']) ?></textarea></p>
+<form action="index.php?action=updateProject" method="POST" >
+    
+    <input type="hidden" id="projectId" name="projectId" value="<?= $currentProject['id'] ?>" />
+    <p><label for="ProjectName">Nom</label><input type="text" name="projectName" id="projectName" value="<?= htmlSpecialChars($currentProject['name']) ?>" /></p>
+    <p><label for="ProjectDescription">Description</label><textarea name="projectDescription" id="projectDescription"><?= htmlSpecialChars($currentProject['description']) ?></textarea></p>
     <p><input type="submit" value="Mise à jour" /></p>
 
 </form>

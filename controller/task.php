@@ -81,7 +81,7 @@ function addTask($category, $projectName, $name, $description, $estimated_durati
         }
         else
         {
-           header('Location: index.php?action=listTask');       
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
     else
@@ -117,7 +117,7 @@ function endTask($tableCheck)
     {
         throw new Exception ('Tâche n\'existe pas');
     }
-   header('Location: index.php?action=listTask');       
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 }
 
