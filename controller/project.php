@@ -17,7 +17,7 @@ function viewProject($id)
         {
             $taskList = $tasks->getTasksFromProject($id);
 
-            $progress = 12;
+            $progress = $projects->getProjectProgress($id);
             require('view/projectView.php');
         }
         else

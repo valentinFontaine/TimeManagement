@@ -67,4 +67,29 @@ class ProjectManager extends Manager
         return $affectedLines;
     }
 
+    function getProjectProgress($id)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('SELECT SUM(estimated_duration * progress / 100) AS time_passed FROM tasks WHERE project_id=:project_id');
+
+
+        $query->execute(array('project_id'=>$id));
+
+        $result = $query->fetch();
+
+        $time_passed = $result['time_passed'];
+
+        $query->closeCursor();
+        
+        $query = $db->prepare('SELECT SUM(estimated_duration) AS total_time FROM tasks WHERE project_id=:project_id');
+        
+        $query->execute(array('project_id'=>$id));    
+
+        $result = $query->fetch();
+
+        $total_time = $result['total_time'];
+
+        $query->closeCursor();
+        return round(($time_passed/$total_time)*100, 2);
+    }
 }
