@@ -74,6 +74,16 @@ try
                         throw new Exception('Champs manquants');
                     }
                     break;
+                case 'viewTask':
+                    if (isset($_GET['task_id']))
+                    {
+                        viewTask($_GET['task_id']);
+                    }
+                    else
+                    {
+                        throw new Exception('Tâche non définie');
+                    }
+                    break;
 
                 case 'connection':
                 case 'verifyIdentity':

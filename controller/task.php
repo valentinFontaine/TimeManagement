@@ -224,4 +224,66 @@ function setCategory()
     }
 } 
                 
+function viewTask($id)
+{
+    require_once('model/TaskManager.php');
+    require_once('model/ProjectManager.php');
+
+    $tasks = new TaskManager();
+    $projects = new ProjectManager();
+
+    
+    if (preg_match('#^[0-9]+$#', $id))
+    {
+        $currentTask = $tasks->getTask($id);
+        $projectList = $projects->getProjects($_SESSION['id'], $_SESSION['category']);
+
+
+        if ($currentTask['members_id'] == $_SESSION['id'])
+        {
+            require('view/taskView.php');
+        }
+        else
+        {
+            throw new Exception ('Accès non autorisé !');
+        }
+    }
+    else
+    {
+        throw new Exception('Tâche non définie');
+    }
+}
+
+function updateTask($id, $category, $projectId, $name, $description, $estimated_duration,  $importance, $due_date)
+{
+    require_once('model/ProjectManager.php');
+
+    $projects = new ProjectManager();
+    $currentProject = $projects->getProject($id);
+
+    if (isset($currentProject['id']))
+    {
+        if (($currentProject['members_id'] == $_SESSION['id']))
+        {
+            $affectedLines = $projects->updateProject($id, $name, $description, $_SESSION['id']);
+            if ($affectedLines == false)
+            {
+                throw new Exception('Le projet n\'a pas pu être mis à jour');
+            }
+            else
+            {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+        }
+        else
+        {
+            throw new Exception ('Ce projet ne vous appartient pas ! vous ne pouvez pas la terminer');
+        }
+    }
+    else
+    {
+        throw new Exception ('Le projet n\'existe pas');
+    }
+
+}
 

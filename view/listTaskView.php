@@ -23,7 +23,7 @@
         <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();"/></form></td> 
         <td><?= $data['category'] ?></td>
         <td><a href="index.php?action=viewProject&project_id=<?= $data['project_id'] ?>"><?= $data['project_name'] ?></a></td>
-        <td><?= $data['task_name'] ?></td>
+        <td><a href="index.php?action=viewTask&task_id=<?= $data['id'] ?>"><?= $data['task_name'] ?></a></td>
         <td><?= $data['description'] ?></td>
         <td><?= $data['estimated_duration'] ?></td>
         <td><?= $data['importance'] ?></td>
