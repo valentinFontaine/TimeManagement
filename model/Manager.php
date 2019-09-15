@@ -8,18 +8,13 @@ class Manager
     {
         $connectionFile = fopen('config/connection.db', 'r');
         
-        $connectionString = fgets($connectionFile);
-        $user=fgets($connectionFile);
-        $password=fgets($connectionFile);
-
-
+        $connectionString = rtrim(fgets($connectionFile));
+        $user=rtrim(fgets($connectionFile));
+        $password=rtrim(fgets($connectionFile));
 
         fclose($connectionFile);
 
-        //echo $connectionString . ' / ' . $user . ' / ' . $password . '<br />';
-
-
-        $db = new PDO('mysql:host=localhost;dbname=TimeManagement;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $db = new PDO($connectionString, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         return $db;
     }
 }

@@ -7,6 +7,7 @@ try
     require('controller/members.php');
     require('controller/task.php');
     require('controller/project.php');
+    require('controller/schedule.php');
 
     if (isset($_POST['sessionCategory']))
     {
@@ -37,6 +38,10 @@ try
                     
                 case 'listTask' :
                     listTask();
+                    break;
+
+                case 'schedule' :
+                    listScheduleDay(10);
                     break;
 
                 case 'addTask' :

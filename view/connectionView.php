@@ -12,7 +12,6 @@
     <p><input type="submit" value="Connexion" /></p>
 
 </form>
-
 <p>Si vous n'êtes pas inscrits, cliquez sur ce <a href='index.php?action=subscription'>lien</a></p>
 
 <?php $content = ob_get_clean(); ?>

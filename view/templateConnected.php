@@ -10,6 +10,8 @@
      <nav>
         <a href="index.php?action=welcome">Accueil</a>
         <a href="index.php?action=listTask">Liste des Tâches à faire</a>
+        <a href="index.php?action=schedule">Planification</a>
+
         <form action="" method="POST" >
             <select name="sessionCategory" id="sessionCategory" onChange="submit();">
                 <?php
