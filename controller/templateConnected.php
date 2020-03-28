@@ -2,7 +2,7 @@
 
 require_once('controller/task.php');
 
-$listCategory = getListCategory();
+$listCategory = getListTemplateCategory();
 
 
 require('view/templateConnected.php');

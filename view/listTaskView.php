@@ -39,8 +39,16 @@
             <td></td>
             <td>
                 <select name="category" id="category">
-                    <option value="personal">perso</option>
-                    <option value="workrelated">pro</option>
+                    <?php
+                        $i = 0;
+                        while($i <= 1)
+                        {
+                        ?>
+                            <option value="<?= $listCategory[$i][0] ?>" ><?= $listCategory[$i][1] ?></option>
+                    <?php
+                            $i = $i + 1;
+                        }
+                    ?>
                 </select>
             </td>
             <td>

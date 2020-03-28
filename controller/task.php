@@ -22,6 +22,7 @@ function listTask()
     $taskList = $tasks->getTasksToDo($_SESSION['id'], $_SESSION['category']);
     $projects = new ProjectManager();
     $projectList = $projects->getProjects($_SESSION['id'], $_SESSION['category']);
+    $listCategory = getListCategory();
 
     require('view/listTaskView.php');
 }
@@ -154,6 +155,34 @@ function getListCategory()
         $_SESSION['category'] = '%';
     }
 
+    $listCategory = array();
+    
+    if ($_SESSION['category'] == 'workRelated')
+    {
+        $listCategory[0][0] = 'workRelated';
+        $listCategory[0][1] = translateCategory('workRelated');
+        $listCategory[1][0] = 'personal';
+        $listCategory[1][1] = translateCategory('personal');
+    }
+    else
+    {
+        $listCategory[0][0] = 'personal';
+        $listCategory[0][1] = translateCategory('personal');
+        $listCategory[1][0] = 'workRelated';
+        $listCategory[1][1] = translateCategory('workRelated');
+    }
+
+
+    return $listCategory;
+}
+
+function getListTemplateCategory()
+{
+    if (!isset($_SESSION['category']))
+    {
+        $_SESSION['category'] = '%';
+    }
+
     $i = 0;
     
     $listCategory = array();
@@ -184,7 +213,6 @@ function getListCategory()
 
     return $listCategory;
 }
-
 function translateCategory($category)
 {
     switch ($category)
