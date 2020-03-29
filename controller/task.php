@@ -259,6 +259,7 @@ function viewTask($id)
 
     $tasks = new TaskManager();
     $projects = new ProjectManager();
+    //$curProject = new ProjectManager();
 
     
     if (preg_match('#^[0-9]+$#', $id))
@@ -266,9 +267,9 @@ function viewTask($id)
         $currentTask = $tasks->getTask($id);
         $projectList = $projects->getProjects($_SESSION['id'], $_SESSION['category']);
 
-
         if ($currentTask['members_id'] == $_SESSION['id'])
         {
+            $currentProject = $projects->getProject($currentTask['project_id']);
             require('view/taskView.php');
         }
         else

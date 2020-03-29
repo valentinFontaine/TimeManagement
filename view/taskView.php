@@ -15,9 +15,9 @@
         </select>
     </p>
 
-    <p><input list="projectList" name="project" id="project" autocomplete="off" /></p>
+    <p><input list="projectList" name="project" id="project" autocomplete="off" value="<?= $currentProject['name'] ?>"/></p>
     <p>
-        <datalist name="projectList" id="projectList" value="<?= $currentTask['projectName'] ?>">
+        <datalist name="projectList" id="projectList" value="<?= $currentTask['name'] ?>">
             <?php 
                 while($project = $projectList->fetch())
                 {
