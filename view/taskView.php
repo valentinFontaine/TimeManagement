@@ -33,7 +33,7 @@
     <p><textarea name="description" id="description" ><?= $currentTask['description'] ?></textarea></p>
     <p><input type="text" name="estimated_duration" id="estimated_duration" value="<?= $currentTask['estimated_duration'] ?>" required /></p>
     <p><input type="range" min="1" max="4" step="1" name="importance" id="importance" value="<?= $currentTask['importance'] ?>" title="1=Très importante, 4=peut important" /></p>
-    <p><input type="date" name="due_date" id="due_date" value="<?= substr($currentTask['due_date'], 10)?>" required/></p>
+    <p><input type="date" name="due_date" id="due_date" value="<?= substr($currentTask['due_date'], 0, 10)?>" required/></p>
     <p><input type="submit" value="Mise à jour" /></p>
 
 </form>
