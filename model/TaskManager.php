@@ -78,4 +78,16 @@ class TaskManager extends Manager
         return $affectedLines;
     }
 
-}
+    function updateTask($id, $category, $projectId, $name, $description, $estimated_duration,  $importance, $due_date) 
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('UPDATE tasks SET category=:category,  project_id=:project_id, name=:name,  description=:description, due_date=:due_date, estimated_duration=:estimated_duration, importance=:importance WHERE id=:id');
+ 
+        $affectedLines = $query->execute(array('category' => $category, 'project_id' => intval($projectId), 'name' => $name, 'description' => $description, 'due_date' => $due_date, 'estimated_duration' => $estimated_duration,'importance' => $importance, 'id' => intval($id)));
+
+        $query->closeCursor();
+
+        return $affectedLines;
+    }
+    
+} 

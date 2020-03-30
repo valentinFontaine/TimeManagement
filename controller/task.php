@@ -283,36 +283,43 @@ function viewTask($id)
     }
 }
 
-function updateTask($id, $category, $projectId, $name, $description, $estimated_duration,  $importance, $due_date)
+function updateTask($id, $category, $currentProjectName, $name, $description, $estimated_duration,  $importance, $due_date, $members_id)
 {
+    // à faire !
+    require_once('model/TaskManager.php');
     require_once('model/ProjectManager.php');
 
+    $tasks = new TaskManager();
     $projects = new ProjectManager();
-    $currentProject = $projects->getProject($id);
+    $currentTask = $tasks->getTask($id);
+    $currentProject = $projects->getProjectByName($currentProjectName, $members_id);
 
-    if (isset($currentProject['id']))
+    if (isset($currentTask['id']))
     {
-        if (($currentProject['members_id'] == $_SESSION['id']))
+        if (($currentTask['members_id'] == $_SESSION['id']))
         {
-            $affectedLines = $projects->updateProject($id, $name, $description, $_SESSION['id']);
+            
+            $affectedLines = $tasks->updateTask($id, $category, $currentProject['id'], $name, $description, $estimated_duration,  $importance, $due_date);
             if ($affectedLines == false)
             {
-                throw new Exception('Le projet n\'a pas pu être mis à jour');
+                throw new Exception('La tâche n\'a pas pu être mise à jour');
             }
             else
             {
+                
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
+
         }
         else
         {
-            throw new Exception ('Ce projet ne vous appartient pas ! vous ne pouvez pas la terminer');
+
+            throw new Exception ('Cette tâche ne vous appartient pas ! vous ne pouvez pas la mettre à jour');
         }
     }
     else
     {
-        throw new Exception ('Le projet n\'existe pas');
+        throw new Exception ('La tache n\'existe pas');
     }
-
 }
 

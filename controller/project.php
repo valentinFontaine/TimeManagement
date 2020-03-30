@@ -59,7 +59,7 @@ function updateProject($id, $name, $description)
         else
         {
 
-            throw new Exception ('Ce projet ne vous appartient pas ! vous ne pouvez pas la terminer');
+            throw new Exception ('Ce projet ne vous appartient pas ! vous ne pouvez pas le mettre à jour');
         }
     }
     else

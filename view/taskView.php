@@ -7,7 +7,7 @@
 
 <form action="index.php?action=updateTask" method="POST" >
     
-    <input type="hidden" id="taskId" name="taskId" value="<?= $currentTask['id'] ?>" />
+    <input type="hidden" id="task_id" name="task_id" value="<?= $currentTask['id'] ?>" />
     <p>
         <select name="category" id="category">
             <option value="personal" <?= ($currentTask['category'] == 'personal') ? 'selected' :  ''; ?>>perso</option>

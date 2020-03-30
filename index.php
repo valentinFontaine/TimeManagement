@@ -89,7 +89,18 @@ try
                         throw new Exception('Tâche non définie');
                     }
                     break;
+                case 'updateTask' :
+                    if (isset($_POST['task_id']) AND isset($_POST['category']) AND isset($_POST['project']) AND isset($_POST['task']) AND isset($_POST['description']) AND isset($_POST['importance']) AND isset($_POST['estimated_duration']) AND isset($_POST['due_date']))
+                    {
+                        updateTask($_POST['task_id'], $_POST['category'], $_POST['project'], $_POST['task'], $_POST['description'], $_POST['estimated_duration'], $_POST['importance'], $_POST['due_date'], $_SESSION['id']);
+                    }
+                    else
+                    {
+                        throw new Exception('Champs manquants');
+                    }
+                    break;
 
+                
                 case 'connection':
                 case 'verifyIdentity':
                 case 'subscription':
