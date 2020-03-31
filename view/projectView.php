@@ -35,7 +35,7 @@
     {
 ?>
     <tr>
-        <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();"/></form></td> 
+    <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();" <?= ($data['progress']==100) ? 'checked' : ''?>/></form></td> 
         <td><?= $data['category'] ?></td>
         <td><?= $data['task_name'] ?></td>
         <td><?= $data['description'] ?></td>
