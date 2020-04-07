@@ -1,0 +1,3 @@
+mysql:host=localhost;dbname=TimeManagement;charset=utf8
+root
+
