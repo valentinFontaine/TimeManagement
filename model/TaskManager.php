@@ -78,6 +78,17 @@ class TaskManager extends Manager
         return $affectedLines;
     }
 
+    function cancelEndTask($id)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare('UPDATE tasks SET end_date=\'00-00-0000 00:00:00\', progress=0 WHERE id=:id');
+ 
+        $affectedLines = $query->execute(array('id' => intval($id)));
+        $query->closeCursor();
+
+        return $affectedLines;
+    }
+
     function updateTask($id, $category, $projectId, $name, $description, $estimated_duration,  $importance, $due_date) 
     {
         $db = $this->dbConnect();

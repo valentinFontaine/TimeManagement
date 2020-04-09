@@ -20,7 +20,7 @@
     {
 ?>
     <tr>
-        <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();"/></form></td> 
+        <td><form action="index.php?action=endTask" method="POST"><input type="checkbox" id="checkTask_<?= $data['id'] ?>" name="checkTask_<?= $data['id'] ?>" onChange="submit();" <?= ($data['progress']==100) ? 'checked' : ''?>/><input type="Hidden" id="checkTaskHidden_<?= $data['id'] ?>" name="checkTaskHidden_<?= $data['id'] ?>" value="off"/></form></td> 
         <td><?= $data['category'] ?></td>
         <td><a href="index.php?action=viewProject&project_id=<?= $data['project_id'] ?>"><?= $data['project_name'] ?></a></td>
         <td><a href="index.php?action=viewTask&task_id=<?= $data['id'] ?>"><?= $data['task_name'] ?></a></td>

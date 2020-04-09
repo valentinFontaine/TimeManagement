@@ -97,21 +97,25 @@ function endTask($tableCheck)
 
     require_once('model/TaskManager.php');
 
-
-    
     $tasks = new TaskManager();
-    
     $currentTask = $tasks->getTask($tableCheck['id']);
 
     if (isset($currentTask['id']))
     {
-        if (($currentTask['members_id'] == $_SESSION['id']) AND ($tableCheck['value'] == 'on'))
+        if (($currentTask['members_id'] == $_SESSION['id']))
         {
-            $tasks->endTask($currentTask['id']);
+            if ($tableCheck['value'] == 'on')
+            {
+                $tasks->endTask($currentTask['id']);
+            }
+            else
+            {
+                $tasks->cancelEndTask($currentTask['id']);
+            }
         }
         else
         {
-            throw new Exception ('Cette tâche ne vous appartient pas ! vous ne pouvez pas la terminer');
+            throw new Exception ('Cette tâche ne vous appartient pas ! vous ne pouvez pas la terminer' . $tableCheck['value']);
         }
     }
     else
@@ -124,27 +128,37 @@ function endTask($tableCheck)
 
 function getTaskCheckId($post)
 {
-
+    
     $taskId = '';
     $table = array();
     $message = '';
+    $returnValue = '';
 
     foreach($post as $name => $value)
     {
         
         $message = $message . '<br />['. $name . '] : ' . $value;
-        if (preg_match("#^checkTask_[0-9]+$#", $name) )
+        if (preg_match("#^checkTask(Hidden)?_[0-9]+$#", $name) )
         {
-            
-            $taskId = intval(substr($name, strlen("checkTask_")));
-            $table = array('id' => $taskId, 'value' => $value);
-            return $table;
+            if (! (preg_match("#Hidden#", $name) AND ($returnValue != '')))
+            {
+                $returnValue = $value;
+            }
+
+            $taskId = intval(substr($name, strrpos($name, "_") + 1));
+            $table = array('id' => $taskId, 'value' => $returnValue);
+            $message = $message . ', TaskId = ' . $taskId;               
         }
     }
-
-    throw new Exception($message);
-
-    return $table;
+    
+    if ($returnValue != '') 
+    {
+        return $table;
+    }
+    else 
+    {
+        throw new Exception($message);
+    }
 }
 
 
