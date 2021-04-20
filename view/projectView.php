@@ -55,7 +55,7 @@
             <td>
                 <select name="category" id="category">
                     <option value="personal">perso</option>
-                    <option value="workrelated">pro</option>
+                    <option value="workRelated">pro</option>
                 </select>
             </td>
             <td><input type="text" name="task" id="task" placeholder="nom tâche" required/></td>

@@ -11,7 +11,7 @@
     <p>
         <select name="category" id="category">
             <option value="personal" <?= ($currentTask['category'] == 'personal') ? 'selected' :  ''; ?>>perso</option>
-            <option value="workrelated" <?= ($currentTask['category'] == 'workrelated') ? 'selected' : ''; ?>>pro</option>
+            <option value="workRelated" <?= ($currentTask['category'] == 'workRelated') ? 'selected' : ''; ?>>pro</option>
         </select>
     </p>
 
