@@ -54,8 +54,15 @@
             <td></td>
             <td>
                 <select name="category" id="category">
-                    <option value="personal">perso</option>
-                    <option value="workRelated">pro</option>
+                    <?php
+                        $i = 0;
+                        while($i <= 1)
+                        {
+                        ?>
+                            <option value="<?= $listCategory[$i][0] ?>" ><?= $listCategory[$i][1] ?></option>
+                    <?php
+                            $i = $i + 1;
+                        }
                 </select>
             </td>
             <td><input type="text" name="task" id="task" placeholder="nom tâche" required/></td>

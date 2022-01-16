@@ -18,6 +18,7 @@ function viewProject($id)
             $taskList = $tasks->getTasksFromProject($id);
 
             $progress = $projects->getProjectProgress($id);
+            $listCategory = getListCategory();
             require('view/projectView.php');
         }
         else
