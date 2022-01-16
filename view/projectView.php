@@ -63,6 +63,7 @@
                     <?php
                             $i = $i + 1;
                         }
+                        ?>
                 </select>
             </td>
             <td><input type="text" name="task" id="task" placeholder="nom tâche" required/></td>
